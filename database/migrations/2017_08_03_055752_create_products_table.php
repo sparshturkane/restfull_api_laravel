@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use App\Product;
 class CreateProductsTable extends Migration
 {
     /**
@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description', 1000);
             $table->integer('quantity')->unsigned();
-            $table->integer('status')->default(Product::UNAVALIABLE_PRODUCT);
+            $table->string('status')->default(Product::UNAVALIABLE_PRODUCT);
             $table->string('image');
             $table->integer('seller_id')->unsigned();
             $table->timestamps();
