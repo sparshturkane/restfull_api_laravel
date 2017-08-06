@@ -90,7 +90,13 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse("Cannot remove this resource permanently. It is related with any other resource", 409);
             }
         }
-        return parent::render($request, $exception);
+
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+        
+        return $this->errorResponse("Unexpected Exception. Try Later", 500);
+
     }
 
     /**
