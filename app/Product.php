@@ -2,12 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\Seller;
 use App\Transaction;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
+    use SoftDeletes;
     const AVALIABLE_PRODUCT = 'avaliable';
     const UNAVALIABLE_PRODUCT = 'unavaliable';
     protected $fillable = [
@@ -18,6 +20,7 @@ class Product extends Model
         'image',
         'seller_id',
     ];
+    protected $dates = ['deleted_at'];
 
     public function isAvaliable()
     {
