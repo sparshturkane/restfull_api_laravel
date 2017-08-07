@@ -48,7 +48,8 @@ class CategoryController extends ApiController
      */
     public function show(Category $category)
     {
-        //
+        // fast because magic of implicit model binding
+        return $this->showOne($category);
     }
 
     /**
