@@ -20,6 +20,11 @@ class Product extends Model
         'image',
         'seller_id',
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
+    
     protected $dates = ['deleted_at'];
 
     public function isAvaliable()
