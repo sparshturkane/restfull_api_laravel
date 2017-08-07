@@ -24,10 +24,10 @@ class TransactionController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -35,10 +35,10 @@ class TransactionController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -48,7 +48,7 @@ class TransactionController extends ApiController
      */
     public function show(Transaction $transaction)
     {
-        //
+        return $this->showOne($transaction);
     }
 
     /**
@@ -57,10 +57,10 @@ class TransactionController extends ApiController
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
+    // public function edit(Transaction $transaction)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -69,10 +69,10 @@ class TransactionController extends ApiController
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
+    // public function update(Request $request, Transaction $transaction)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +80,8 @@ class TransactionController extends ApiController
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
-    {
-        //
-    }
+    // public function destroy(Transaction $transaction)
+    // {
+    //     //
+    // }
 }
