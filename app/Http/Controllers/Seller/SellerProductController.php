@@ -58,9 +58,42 @@ class SellerProductController extends ApiController
      * @param  \App\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seller $seller)
+    public function update(Request $request, Seller $seller, Product $product)
     {
-        //
+        $rules = [
+            'quantity' => 'integer|min:1',
+            'status' => 'in:'.Product::AVALIABLE_PRODUCT.','.Product::UNAVALIABLE_PRODUCT,
+            'image' => 'image',
+        ];
+
+        $this->validate($request, $rules);
+
+        // if the product belong to perticula seller then only we have to allow it to 
+        // allow it to change or else not
+
+        $this->checkSeller($seller, $product);
+
+        $product->fill($request->intersect([
+            'name',
+            'description',
+            'quantity',
+        ]));
+
+        if ($request->has('status')) {
+            $product->status = $request->status;
+
+            if ($product->isAvaliable() && $product->categories()->count() == 0) {
+                return $this->errorResponse('An active product must have at least one category', 409);
+            }
+        }
+
+        if ($product->isClean()) {
+            return $this->errorResponse('you need to specify a different value to update', 422);
+        }
+
+        $product->save();
+
+        return $this->showOne($product);
     }
 
     /**
@@ -72,5 +105,13 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller)
     {
         //
+    }
+
+    protected function checkSeller(Seller $seller, Product $product)
+    {
+        if ($seller->id != $product->seller_id) {
+            throw new HttpException(422, "The specified seller is not the actual seller of the product");
+            
+        }
     }
 }
