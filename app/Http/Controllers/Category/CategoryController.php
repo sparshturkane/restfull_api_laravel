@@ -79,7 +79,33 @@ class CategoryController extends ApiController
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // $rules = [];
+        // $this->validate($request, $rules);
+
+        // if ($request->has('name')) {
+        //     $category->name = $request->name;
+        // }
+
+        // if ($request->has('description')) {
+        //     $category->description = $request->description;
+        // }
+
+        // fill means we are filling the category instance
+        // intersect means only values specified inside [] array will be accepted
+        // eg name, description
+        $category->fill($request->intersect([
+            'name', 
+            'description',
+        ]));
+
+        if ($category->isClean()) {
+            // return response()->json(['error' => 'You need to specify a different value to update', 'code' => 422], 422);
+            return $this->errorResponse('You need to specify a different value to update', 422);
+        }
+
+        $category->save();
+
+        return $this->showOne($category);
     }
 
     /**
