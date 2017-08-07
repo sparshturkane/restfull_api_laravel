@@ -116,6 +116,8 @@ class CategoryController extends ApiController
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        // return response()->json(['data' => $user], 200);
+        return $this->showOne($category);
     }
 }
